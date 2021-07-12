@@ -11,11 +11,11 @@ program
 
 program.on('--help', () => {
   console.log(chalk.yellow('# run eslint and stylelint'));
-  console.log(chalk.white('# moo lint'));
+  console.log(chalk.white('# vii lint'));
   console.log(chalk.yellow('# run eslint only'));
-  console.log(chalk.white('# moo lint -e'));
+  console.log(chalk.white('# vii lint -e'));
   console.log(chalk.yellow('# run stylelint only'));
-  console.log(chalk.white('# moo lint -s'));
+  console.log(chalk.white('# vii lint -s'));
 })
 
 const args = require('minimist')(process.argv.slice(2))

@@ -2,4 +2,4 @@
 
 const { exec } = require('shelljs')
 
-exec('start-storybook -p 6006')
+exec('yarn run storybook')

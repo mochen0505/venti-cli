@@ -4,10 +4,9 @@ const inquirer = require('inquirer')
 const program = require('commander')
 const chalk = require('chalk')
 const templateInit = require('../utils/templateInit')
-const { TEMPLATES, PLUGINS } = require('../scripts/constants');
+const { TEMPLATES } = require('../scripts/constants');
 
 const templateChoices = TEMPLATES.map(template => ({ name: template, value: template }))
-// const pluginChoices = Object.values(PLUGINS);
 
 const promptList = [
 
@@ -31,14 +30,6 @@ const promptList = [
     default: templateChoices[0].value,
     choices: templateChoices,
   },
-
-  // TODO: 选择高阶组件
-  // {
-  //     type: 'checkbox',
-  //     name: 'hoc',
-  //     message: `${chalk.yellow('select HOCs you want to use:')}`,
-  //     choices: pluginChoices,
-  // },
 ]
 
 program

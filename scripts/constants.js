@@ -10,21 +10,12 @@ const isDev = process.env.NODE_ENV !== 'production';
 const NPM_VERSION_URL = 'https://registry.npmjs.org/@morax/spear/latest';
 
 const TEMPLATES = [
-  'morax-template'
+  'venti-template'
 ];
 
 const GITHUB = {
   host: 'github.com/mochen0505'
 }
-
-const PLUGINS = {
-  guid: {
-    name: 'guid',
-    dependencies: '@morax/shield-guid', // 用作index.js import
-    checked: true, // inquirer 交互的时候是否默认选中
-    appUse: 'i18n', // 生成index.js app.use(i18n)使用
-  },
-};
 
 module.exports = {
     SPEAR_PATH,
@@ -36,5 +27,4 @@ module.exports = {
     NPM_VERSION_URL,
     TEMPLATES,
     GITHUB,
-    PLUGINS,
 }

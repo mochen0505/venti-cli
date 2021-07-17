@@ -5,6 +5,9 @@
   "bin": {
     "vii": "bin/vii.js"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {},
   "keywords": [
     "node",
@@ -45,6 +48,7 @@
     "@types/webpack-env": "^1.16.2",
     "@typescript-eslint/eslint-plugin": "^4.28.1",
     "@typescript-eslint/parser": "^4.28.1",
+    "antd": "^4.16.7",
     "async": "^2.6.3",
     "autoprefixer": "^9.8.6",
     "babel-loader": "^8.2.2",

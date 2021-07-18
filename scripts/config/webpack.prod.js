@@ -11,7 +11,7 @@ module.exports = merge(common, {
     plugins: [
         new CleanWebpackPlugin(),
         new PurgeCSSPlugin({
-            paths: glob.sync(`${resolve(PROJECT_PATH, './src')}/**/*.{tsx,less,css}`, { nodir: true }),
+            paths: glob.sync(`${resolve(PROJECT_PATH, './packages')}/**/*.{tsx,less,css}`, { nodir: true }),
             whitelist: ['html', 'body']
         }),
     ],

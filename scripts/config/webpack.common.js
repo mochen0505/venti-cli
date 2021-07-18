@@ -1,12 +1,11 @@
 const { resolve } = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CopyPlugin = require('copy-webpack-plugin')
 const WebpackBar = require('webpackbar')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const glob = require('glob')
 const { PROJECT_PATH, SPEAR_PATH, isDev } = require('../constants')
 
 const getCssLoaders = (importLoaders) => [
@@ -39,21 +38,20 @@ const getCssLoaders = (importLoaders) => [
     },
 ]
 
+const entry = glob.sync(`${resolve(PROJECT_PATH, './packages')}/**/index.js`)
+  .reduce((x, y) => Object.assign(x, {
+    [y.split('/').slice(-2, -1)]: y,
+  }), {});
+
+
 module.exports = {
-    entry: {
-        app: resolve(PROJECT_PATH, './src/index.js'),
-    },
+    entry: entry,
     output: {
-        filename: `js/[name]${isDev ? '' : '.[hash:8]'}.js`,
+        filename: `js/[name]${isDev ? '' : '.[contenthash:8]'}.js`,
         path: resolve(PROJECT_PATH, './dist'),
     },
     resolve: {
         extensions: ['.tsx', '.ts', '.js', '.json'],
-        alias: {
-            Src: resolve(PROJECT_PATH, './src'),
-            Components: resolve(PROJECT_PATH, './src/components'),
-            Utils: resolve(PROJECT_PATH, './src/utils'),
-        },
     },
     resolveLoader: {
         modules: [resolve(SPEAR_PATH, 'node_modules')],
@@ -90,8 +88,7 @@ module.exports = {
                     ],
                 },
                 include: [
-                    resolve(PROJECT_PATH, './src'),
-                    resolve(PROJECT_PATH, './node_modules/@morax')
+                    resolve(PROJECT_PATH, './packages'),
                 ],
             },
             {
@@ -114,57 +111,21 @@ module.exports = {
             test: /\.(png|jpg|jpeg|svg|gif)$/,
             type: 'asset',
             generator: {
-              filename: 'assets/images/[hash:8].[name][ext]',
+              filename: 'assets/images/[contenthash:8].[name][ext]',
             },
           },
         ],
     },
     plugins: [
-        new HtmlWebpackPlugin({
-            template: resolve(PROJECT_PATH, './public/index.html'),
-            filename: 'index.html',
-            cache: false,
-            minify: isDev
-                ? false
-                : {
-                      removeAttributeQuotes: true,
-                      collapseWhitespace: true,
-                      removeComments: true,
-                      collapseBooleanAttributes: true,
-                      collapseInlineTagWhitespace: true,
-                      removeRedundantAttributes: true,
-                      removeScriptTypeAttributes: true,
-                      removeStyleLinkTypeAttributes: true,
-                      minifyCSS: true,
-                      minifyJS: true,
-                      minifyURLs: true,
-                      useShortDoctype: true,
-                  },
-        }),
-        new CopyPlugin({
-            patterns: [
-                {
-                    context: resolve(PROJECT_PATH, './public'),
-                    from: '*',
-                    to: resolve(PROJECT_PATH, './dist'),
-                    toType: 'dir',
-                    globOptions: {
-                        dot: true,
-                        gitignore: true,
-                        ignore: ["**/index.html"],
-                    },
-                },
-            ],
-        }),
         new WebpackBar({
             name: isDev ? '正在启动...' : '正在打包...',
             color: '#45bf39',
         }),
-        new ForkTsCheckerWebpackPlugin({
-            typescript: {
-                configFile: resolve(SPEAR_PATH, './tsconfig.json'),
-            },
-        }),
+        // new ForkTsCheckerWebpackPlugin({
+        //     typescript: {
+        //         configFile: resolve(SPEAR_PATH, './tsconfig.json'),
+        //     },
+        // }),
         new webpack.HotModuleReplacementPlugin(),
         !isDev &&
             new MiniCssExtractPlugin({

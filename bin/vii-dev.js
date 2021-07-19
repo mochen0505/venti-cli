@@ -2,7 +2,7 @@
 
 const program = require('commander');
 const chalk = require('chalk');
-const { SPEAR_PATH, SERVER_PORT } = require('../scripts/constants')
+const { VENTI_PATH, SERVER_PORT } = require('../scripts/constants')
 const { resolve } = require('path')
 const storybook = require('@storybook/react/standalone')
 
@@ -27,7 +27,7 @@ const port = args.p || args.port || SERVER_PORT;
 
 storybook({
   mode: 'dev',
-  configDir: resolve(SPEAR_PATH, './.storybook'),
+  configDir: resolve(VENTI_PATH, './.storybook'),
   port: port,
   quiet: true
 })

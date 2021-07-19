@@ -1,6 +1,6 @@
 const path = require('path');
 
-const SPEAR_PATH = path.resolve(__dirname, '../');
+const VENTI_PATH = path.resolve(__dirname, '../');
 const PROJECT_PATH = process.cwd();
 const PROJECT_NODE_VERSION = process.version;
 const SERVER_HOST = '127.0.0.1';
@@ -18,7 +18,7 @@ const GITHUB = {
 }
 
 module.exports = {
-    SPEAR_PATH,
+    VENTI_PATH,
     PROJECT_PATH,
     PROJECT_NODE_VERSION,
     SERVER_HOST,

@@ -6,7 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const glob = require('glob')
-const { PROJECT_PATH, SPEAR_PATH, isDev } = require('../constants')
+const { PROJECT_PATH, VENTI_PATH, isDev } = require('../constants')
 
 const getCssLoaders = (importLoaders) => [
     isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
@@ -54,7 +54,7 @@ module.exports = {
         extensions: ['.tsx', '.ts', '.js', '.json'],
     },
     resolveLoader: {
-        modules: [resolve(SPEAR_PATH, 'node_modules')],
+        modules: [resolve(VENTI_PATH, 'node_modules')],
     },
     module: {
         rules: [
@@ -66,17 +66,17 @@ module.exports = {
                     // 无法写在.babelrc里
                     presets: [
                         [
-                            `${SPEAR_PATH}/node_modules/@babel/preset-env`,
+                            `${VENTI_PATH}/node_modules/@babel/preset-env`,
                             {
                                 modules: false,
                             },
                         ],
-                        `${SPEAR_PATH}/node_modules/@babel/preset-react`,
-                        `${SPEAR_PATH}/node_modules/@babel/preset-typescript`,
+                        `${VENTI_PATH}/node_modules/@babel/preset-react`,
+                        `${VENTI_PATH}/node_modules/@babel/preset-typescript`,
                     ],
                     plugins: [
                         [
-                            `${SPEAR_PATH}/node_modules/@babel/plugin-transform-runtime`,
+                            `${VENTI_PATH}/node_modules/@babel/plugin-transform-runtime`,
                             {
                                 corejs: {
                                     version: 3,
@@ -123,7 +123,7 @@ module.exports = {
         }),
         // new ForkTsCheckerWebpackPlugin({
         //     typescript: {
-        //         configFile: resolve(SPEAR_PATH, './tsconfig.json'),
+        //         configFile: resolve(VENTI_PATH, './tsconfig.json'),
         //     },
         // }),
         new webpack.HotModuleReplacementPlugin(),

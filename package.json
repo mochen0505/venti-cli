@@ -1,6 +1,6 @@
 {
   "name": "@ventii/cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Node CLI for components library venti",
   "bin": {
     "vii": "bin/vii.js"

@@ -6,7 +6,7 @@ const dayjs = require('dayjs');
 const chalk = require('chalk');
 const packageVersion = require('../package.json').version;
 const requiredNodeVersion = require('../package.json').engines.node;
-const { checkNodeVersion, checkMoraxVersion, notifier } = require('../utils/checkVersion');
+const { checkNodeVersion, checkVentiVersion, notifier } = require('../utils/checkVersion');
 
 
 const config = new Conf();
@@ -28,7 +28,7 @@ function programConfig() {
 if(!lastUpdatedDate || currentDate !== lastUpdatedDate) {
   config.set('last-updated-date', currentDate);
   checkNodeVersion(requiredNodeVersion);
-  checkMoraxVersion().then(res => {
+  checkVentiVersion().then(res => {
     const data = JSON.parse(res.body);
     const latest = data.version;
     notifier(latest);

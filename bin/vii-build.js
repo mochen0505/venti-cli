@@ -2,21 +2,20 @@
 
 const program = require('commander');
 const chalk = require('chalk');
-const webpack = require('webpack');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
+const ora = require('ora')
+const { rollup } = require('rollup')
+const getRollupConfigs = require('../scripts/config/rollup.config')
 
-process.env.NODE_ENV = 'production';
-const webpackConfig = require('../scripts/config/webpack.prod');
 
 program
   .usage('[options]')
-  .option('-a, --analyze', 'enable bundle analyze mode')
+  .option('-s --scope <scope>', 'build specific component')
 
 program.on('--help', () => {
-  console.log(chalk.yellow('# Build the app'));
+  console.log(chalk.yellow('# Build all the components'));
   console.log(chalk.white('# moo build'));
-  console.log(chalk.yellow('# enable bundle analyze mode'));
-  console.log(chalk.white('# moo build -a'));
+  console.log(chalk.yellow('# Build specific component'));
+  console.log(chalk.white('# moo build -s <scope>'));
 })
 
 const args = require('minimist')(process.argv.slice(2));
@@ -25,20 +24,25 @@ if (args.h || args.help) {
   program.help()
 }
 
-if (args.a || args.analyze) {
-  webpackConfig.plugins.push(
-    new BundleAnalyzerPlugin({
-      analyzerMode: 'server',
-      analyzerHost: '127.0.0.1',
-      analyzerPort: 8889,
-    })
-  );
-}
+const scope = args.s || args.scope
 
-webpack(webpackConfig, (err, stats) => {
-  if (err) {
-    return err
-  }
+const spinner = ora({
+  color: 'yellow',
+  text: chalk.yellow('Building...'),
+})
 
-  return stats
-});
+spinner.start()
+
+const rollupConfigs = getRollupConfigs(scope)
+rollupConfigs.map(item => {
+  const { output, ...props } = item
+  rollup(props).then(bundle => {
+    spinner.stop()
+    console.log(chalk.yellow('# Built successfully.'));
+    bundle.write(output)
+  }).catch(error => {
+    console.log(chalk.red(error));
+    process.exit(-1)
+  })
+})
+

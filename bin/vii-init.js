@@ -38,9 +38,9 @@ program
 
 program.on('--help', () => {
   console.log(chalk.yellow('# Create your app by step'));
-  console.log(chalk.white('# moo init'));
+  console.log(chalk.white('# vii init'));
   console.log(chalk.yellow('# Create your app with a project name'));
-  console.log(chalk.white('# moo init [projectName]'));
+  console.log(chalk.white('# vii init [projectName]'));
 })
 
 const args = require('minimist')(process.argv.slice(2));

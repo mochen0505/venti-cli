@@ -13,9 +13,9 @@ program
 
 program.on('--help', () => {
   console.log(chalk.yellow('# Build all the components'));
-  console.log(chalk.white('# moo build'));
+  console.log(chalk.white('# vii build'));
   console.log(chalk.yellow('# Build specific component'));
-  console.log(chalk.white('# moo build -s <scope>'));
+  console.log(chalk.white('# vii build -s <scope>'));
 })
 
 const args = require('minimist')(process.argv.slice(2));

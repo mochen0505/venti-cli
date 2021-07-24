@@ -17,9 +17,9 @@ function programConfig() {
   program
     .version(packageVersion)
     .usage('<cmd> [options]')
-    .command('dev', 'Run dev server')
-    .command('build', 'Build the app')
-    .command('init', 'Create a template app')
+    .command('dev', 'Run storybook')
+    .command('build', 'Build your library')
+    .command('init', 'Create a template library')
     .command('lint', 'Lint the code')
     .command('changelog', 'Print the log')
     .parse(process.argv)

@@ -1,3 +1,3 @@
 # README #
 
-A Node CLI component library Venti
+A Node CLI component library

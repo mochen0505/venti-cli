@@ -15,7 +15,7 @@ function setPlugins() {
 }
 
 function getRollupConfigs(scope) {
-  
+
   const allEntry = glob.sync(`${resolve(PROJECT_PATH, './packages')}/**/index.js`)
     .reduce((x, y) => Object.assign(x, {
       [y.split('/').slice(-2, -1)]: y,

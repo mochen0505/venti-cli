@@ -28,7 +28,7 @@ const scope = args.s || args.scope
 
 const spinner = ora({
   color: 'yellow',
-  text: chalk.yellow('Building...'),
+  text: chalk.yellow('# Building...'),
 })
 
 spinner.start()

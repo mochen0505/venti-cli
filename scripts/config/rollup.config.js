@@ -18,6 +18,7 @@ function setPlugins() {
     image(),
     postcss(),
     babel({
+      babelrc: false,
       presets: [
         [
           `${VENTI_PATH}/node_modules/@babel/preset-env`,
@@ -26,7 +27,6 @@ function setPlugins() {
           },
         ],
         `${VENTI_PATH}/node_modules/@babel/preset-react`,
-        `${VENTI_PATH}/node_modules/@babel/preset-typescript`,
       ],
       plugins: [
         [
@@ -43,7 +43,7 @@ function setPlugins() {
       include: [
         resolve(PROJECT_PATH, './packages'),
       ],
-      babelHelpers: 'bundled'
+      babelHelpers: 'runtime'
     }),
     commonjs(),
     terser(),

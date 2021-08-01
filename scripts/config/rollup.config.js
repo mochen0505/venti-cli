@@ -17,34 +17,34 @@ function setPlugins() {
     json(),
     image(),
     postcss(),
-    // babel({
-    //   presets: [
-    //     [
-    //       `${VENTI_PATH}/node_modules/@babel/preset-env`,
-    //       {
-    //         modules: false,
-    //       },
-    //     ],
-    //     `${VENTI_PATH}/node_modules/@babel/preset-react`,
-    //     `${VENTI_PATH}/node_modules/@babel/preset-typescript`,
-    //   ],
-    //   plugins: [
-    //     [
-    //       `${VENTI_PATH}/node_modules/@babel/plugin-transform-runtime`,
-    //       {
-    //         corejs: {
-    //           version: 3,
-    //           proposals: true,
-    //         },
-    //         useESModules: true,
-    //       },
-    //     ],
-    //   ],
-    //   include: [
-    //     resolve(PROJECT_PATH, './packages'),
-    //   ],
-    //   babelHelpers: 'bundled'
-    // }),
+    babel({
+      presets: [
+        [
+          `${VENTI_PATH}/node_modules/@babel/preset-env`,
+          {
+            modules: false,
+          },
+        ],
+        `${VENTI_PATH}/node_modules/@babel/preset-react`,
+        `${VENTI_PATH}/node_modules/@babel/preset-typescript`,
+      ],
+      plugins: [
+        [
+          `${VENTI_PATH}/node_modules/@babel/plugin-transform-runtime`,
+          {
+            corejs: {
+              version: 3,
+              proposals: true,
+            },
+            useESModules: true,
+          },
+        ],
+      ],
+      include: [
+        resolve(PROJECT_PATH, './packages'),
+      ],
+      babelHelpers: 'bundled'
+    }),
     commonjs(),
     terser(),
     filesize()

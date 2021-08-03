@@ -1,3 +1,3 @@
 # README #
 
-A Node CLI component library
+A Node CLI for component library

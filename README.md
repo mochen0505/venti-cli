@@ -16,7 +16,7 @@ npm install -g @ventii/cli
 vii init
 ```
 
-* Development
+* Storybook
 
 ```bash
 vii dev

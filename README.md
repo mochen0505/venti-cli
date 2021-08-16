@@ -16,7 +16,7 @@ npm install -g @ventii/cli
 vii init
 ```
 
-* Storybook
+* Start up Storybook server
 
 ```bash
 vii dev
